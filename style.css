@@ -1,0 +1,99 @@
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    color: #e0e6ed;
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+.main-container { width: 100%; max-width: 1200px; display: flex; flex-direction: column; gap: 15px; }
+
+.header-panel { padding: 15px; text-align: center; }
+.header-panel h1 { margin: 0 0 10px 0; font-size: 22px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
+
+.scoreboard { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.team-card { padding: 10px; font-weight: bold; font-size: 14px; transition: 0.3s; text-align: center; border-radius: 10px; }
+.team-card.active { border: 2px solid #ffdd57; background: rgba(255, 221, 87, 0.25); transform: scale(1.05); }
+
+.game-layout { display: flex; gap: 20px; align-items: stretch; }
+
+/* Алаңды сырғытуға арналған блок */
+.board-wrapper {
+    flex: 1;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+/* Алаңның өзі */
+.board {
+    display: grid;
+    grid-template-columns: repeat(11, 70px);
+    grid-template-rows: repeat(11, 70px);
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 15px;
+    min-width: 820px; /* Телефонда осы өлшем сақталады, оңға сырғытуға болады */
+}
+
+.cell {
+    border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: bold; text-align: center; position: relative; color: #333;
+}
+
+.cell-start { background: linear-gradient(135deg, #00b09b, #96c93d); color: white; }
+.cell-lexica { background: #ffefba; }
+.cell-morph { background: #d4fc79; }
+.cell-syntax { background: #e0c3fc; }
+.cell-surprise { background: linear-gradient(135deg, #fceabb, #f8b500); }
+.cell-random { background: linear-gradient(135deg, #ff9a9e, #fecfef); }
+
+.side-panel { width: 220px; padding: 15px; display: flex; flex-direction: column; gap: 15px; text-align: center; }
+
+.dice-box {
+    width: 80px; height: 80px; background: rgba(255,255,255,0.9); margin: 0 auto 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 34px; font-weight: bold; border-radius: 15px; color: #1e3c72;
+}
+
+.glass-btn {
+    width: 100%; padding: 12px; border: none; cursor: pointer;
+    font-weight: bold; color: #1e3c72; transition: 0.3s;
+    background: rgba(255, 255, 255, 0.85); border-radius: 10px; font-size: 14px;
+}
+.glass-btn:hover { background: white; transform: translateY(-2px); }
+.glass-btn.danger { color: #fff; background: rgba(255, 75, 43, 0.8); }
+.glass-btn.danger:hover { background: rgba(255, 75, 43, 1); }
+
+.token-container { position: absolute; bottom: 2px; display: flex; gap: 2px; justify-content: center; width: 100%; flex-wrap: wrap; }
+.token { font-size: 18px; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5)); transition: 0.3s; }
+
+.modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
+.modal-content { width: 100%; max-width: 450px; padding: 25px; text-align: center; background: #fff; color: #333; border-radius: 15px; max-height: 90vh; overflow-y: auto; }
+.modal-text-content { margin: 15px 0; font-size: 15px; line-height: 1.5; text-align: left; background: #f4f4f9; padding: 15px; border-radius: 10px; }
+.hidden { display: none !important; }
+.modal-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; flex-direction: column; }
+
+/* МОБИЛЬДІ БЕЙІМДЕЛУ (Телефондар үшін) */
+@media (max-width: 800px) {
+    .game-layout { flex-direction: column; }
+    .side-panel { width: 100%; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+    .turn-info, .dice-section, #end-game-btn { flex: 1 1 30%; min-width: 120px; }
+    .scoreboard { grid-template-columns: repeat(2, 1fr); }
+    .dice-box { width: 60px; height: 60px; font-size: 24px; margin-bottom: 5px; }
+    .glass-btn { padding: 10px; font-size: 13px; }
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ойын: Көксерек</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="header-panel glass">
+            <h1>«Көксерек» білім сайысы</h1>
+            <div class="scoreboard">
+                <div id="team-0" class="team-card glass active">🐺 Көксерек: <span id="score-0">0</span></div>
+                <div id="team-1" class="team-card glass">🐕 Аққасқа: <span id="score-1">0</span></div>
+                <div id="team-2" class="team-card glass">🐎 Құла бие: <span id="score-2">0</span></div>
+                <div id="team-3" class="team-card glass">🦅 Қыран: <span id="score-3">0</span></div>
+            </div>
+        </div>
+
+        <div class="game-layout">
+            <div class="board-wrapper">
+                <div id="board" class="board">
+                    </div>
+            </div>
+
+            <div class="side-panel glass">
+                <div class="turn-info">
+                    <h3>Кезек: <br><span id="current-team-name" style="color:#ffdd57;">🐺 Көксерек</span></h3>
+                </div>
+                <div class="dice-section">
+                    <div id="dice-value" class="dice-box">🎲</div>
+                    <button id="roll-btn" class="glass-btn">Сүйекті лақтыру</button>
+                </div>
+                <button id="end-game-btn" class="glass-btn danger">Ойынды аяқтау</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal-overlay hidden">
+        <div class="modal-content glass">
+            <h2 id="modal-title">Тапсырма</h2>
+            <div id="modal-text" class="modal-text-content"></div>
+            <div id="modal-actions" class="modal-actions"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
