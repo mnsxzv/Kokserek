@@ -216,15 +216,37 @@ function nextTurn() {
 
 document.getElementById('roll-btn').onclick = function() {
     this.disabled = true;
-    const roll = Math.floor(Math.random() * 6) + 1;
+    const roll = Math.floor(Math.random() * 6) + 1; // 1-ден 6-ға дейінгі сан
     document.getElementById('dice-value').innerText = roll;
     
     const team = teams[currentTurn];
-    team.pos = (team.pos + roll) % totalCells;
+    const oldPos = team.pos;
+    
+    // Жаңа орынды есептеу
+    team.pos = team.pos + roll;
+
+    // ЕГЕР ОЙЫНШЫ БІР АЙНАЛЫМДЫ АЯҚТАСА (40-тан асса немесе 40-қа жетсе)
+    if (team.pos >= totalCells) {
+        team.pos = 0; // Бастапқы нүктеге қою
+        drawTokens();
+        
+        // Ойынды бірден аяқтау терезесін шығару
+        setTimeout(() => {
+            const winner = [...teams].sort((a,b) => b.points - a.points)[0];
+            showModal(
+                "Ойын аяқталды! 🏁", 
+                `<b>${team.name}</b> мәреге жетіп, ойынды аяқтады!<br><br>` +
+                `Жеңімпаз: <b>${winner.name}</b> (${winner.points} ұпай жинады).`, 
+                [{ text: "Жаңа ойын", action: () => location.reload() }]
+            );
+        }, 600);
+        return; // Функцияны осы жерден тоқтату
+    }
     
     drawTokens();
     setTimeout(() => handleCell(team), 500);
 };
+
 
 document.getElementById('end-game-btn').onclick = function() {
     const winner = [...teams].sort((a,b) => b.points - a.points)[0];
